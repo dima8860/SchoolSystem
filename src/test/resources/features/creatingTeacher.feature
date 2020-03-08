@@ -1,5 +1,5 @@
 Feature: As a User I should able to create teacher
-
+  @smoke
   Scenario: As a User I should able to create teacher
     Given User is on home school page
     Then user navigate to teacher module
