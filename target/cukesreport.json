@@ -1,0 +1,95 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "line": 3,
+        "name": "As a User I should able to create teacher",
+        "description": "",
+        "id": "as-a-user-i-should-able-to-create-teacher;as-a-user-i-should-able-to-create-teacher",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 3757496455,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "User is on home school page",
+            "match": {
+              "location": "SchoolCreatingTeacher_steps.user_is_on_home_school_page()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 94239149,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "user navigate to teacher module",
+            "match": {
+              "location": "SchoolCreatingTeacher_steps.user_navigate_to_teacher_module()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 432075583,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "user clicks on button to create teacher",
+            "match": {
+              "location": "SchoolCreatingTeacher_steps.user_clicks_on_button_to_create_teacher()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 3919564895,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "user fill out all information about teacher",
+            "match": {
+              "location": "SchoolCreatingTeacher_steps.user_fill_out_all_information_about_teacher()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 1345423541,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "user clicks on button submit to submit teacher info",
+            "match": {
+              "location": "SchoolCreatingTeacher_steps.user_clicks_on_button_submit_to_submit_teacher_info()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 6556663063,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "verifying that teacher\u0027s info matching database info",
+            "match": {
+              "location": "SchoolCreatingTeacher_steps.verifyingThatTeacherSInfoMatchingDatabaseInfo()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "As a User I should able to create teacher",
+    "description": "",
+    "id": "as-a-user-i-should-able-to-create-teacher",
+    "keyword": "Feature",
+    "uri": "src/test/resources/features/creatingTeacher.feature",
+    "tags": []
+  }
+]
