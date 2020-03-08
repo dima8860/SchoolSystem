@@ -12,7 +12,7 @@
         "steps": [
           {
             "result": {
-              "duration": 3757496455,
+              "duration": 3846272141,
               "status": "passed"
             },
             "line": 4,
@@ -24,7 +24,7 @@
           },
           {
             "result": {
-              "duration": 94239149,
+              "duration": 163359685,
               "status": "passed"
             },
             "line": 5,
@@ -36,7 +36,7 @@
           },
           {
             "result": {
-              "duration": 432075583,
+              "duration": 434545718,
               "status": "passed"
             },
             "line": 6,
@@ -48,7 +48,7 @@
           },
           {
             "result": {
-              "duration": 3919564895,
+              "duration": 3897401243,
               "status": "passed"
             },
             "line": 7,
@@ -60,7 +60,7 @@
           },
           {
             "result": {
-              "duration": 1345423541,
+              "duration": 2537336635,
               "status": "passed"
             },
             "line": 8,
@@ -72,7 +72,7 @@
           },
           {
             "result": {
-              "duration": 6556663063,
+              "duration": 7874501867,
               "status": "passed"
             },
             "line": 9,
@@ -81,6 +81,11 @@
               "location": "SchoolCreatingTeacher_steps.verifyingThatTeacherSInfoMatchingDatabaseInfo()"
             },
             "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@smoke"
           }
         ]
       }

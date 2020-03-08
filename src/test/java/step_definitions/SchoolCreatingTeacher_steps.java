@@ -28,6 +28,7 @@ public class SchoolCreatingTeacher_steps {
     String email ;
     String password;
     String joiningDate;
+    String joiningDateDB;
     String subject;
     String mobileNumber;
     Select selectGender;
@@ -39,12 +40,13 @@ public class SchoolCreatingTeacher_steps {
     String salary ;
     Select selectDepartment ;
     String birthdate ;
+    String birthdateDB;
     int batchIndex ;
     Select selectBatch ;
     String batch;
     String sectionNumber ;
     String address ;
-    String teacherID;
+    String teacherID = "";
 
 
     @Given("User is on home school page")
@@ -69,7 +71,8 @@ public class SchoolCreatingTeacher_steps {
          lastName = faker.name().lastName();
          email = faker.internet().emailAddress();
          password = faker.internet().password();
-         joiningDate = "03/02/2016";
+         joiningDate = "02/02/2016";
+         joiningDateDB = "2016-02-02 00:00:00.0";
          subject  = faker.educator().course();
          mobileNumber = "7731234900";
          selectGender = new Select(addTeacherPage.gender);
@@ -79,6 +82,7 @@ public class SchoolCreatingTeacher_steps {
          salary = String.valueOf((random.nextInt(9) + 1)*10000);
          selectDepartment = new Select(addTeacherPage.department);
          birthdate = "03/02/1978";
+         birthdateDB = "1978-03-02 00:00:00.0";
          batchIndex = random.nextInt(12);
          selectBatch = new Select(addTeacherPage.batch);
          sectionNumber = String.valueOf(3.0);
@@ -96,6 +100,7 @@ public class SchoolCreatingTeacher_steps {
        addTeacherPage.lastName.sendKeys(lastName + Keys.ENTER);
         System.out.println(lastName);
        addTeacherPage.email.sendKeys(email + Keys.ENTER);
+        SeleniumUtils.waitForVisibility(addTeacherPage.joiningDate,10);
        addTeacherPage.joiningDate.sendKeys(joiningDate + Keys.ENTER);
        addTeacherPage.password.sendKeys(password + Keys.ENTER);
        addTeacherPage.subject.sendKeys(subject + Keys.ENTER);
@@ -121,50 +126,58 @@ public class SchoolCreatingTeacher_steps {
     public void user_clicks_on_button_submit_to_submit_teacher_info() {
         addTeacherPage.submitButton.click();
         addTeacherPage.lastTeacherCreated.click();
-        teacherID = addTeacherPage.teacherID.getText();
+        teacherID = addTeacherPage.teacherID.getText().trim();
+        System.out.println("Teacher ID "  + teacherID);
     }
 
     @Then("verifying that teacher's info matching database info")
     public void verifyingThatTeacherSInfoMatchingDatabaseInfo() throws SQLException {
         DBUtility.createConnection();
         List<Map<Object,Object>> data = DBUtility.executeQuery("select * from teacher");
-        int rowNumber = -1;
-        for(int i = 0; i < data.size(); i++){
-            if(data.get(i).get("teacher_id").toString().equals(teacherID)) {
-                rowNumber = i;
+        DBUtility.close();
+        int count = -1;
+        int rowNumber = 0;
+        for(Map<Object, Object> map: data) {
+            count++;
+            if(map.get("TEACHER_ID").toString().equals(teacherID)) {
+                rowNumber = count;
             }
         }
 
-       // select first_name from teacher where teacher_id = 1035;
-        Assert.assertEquals(firstName, data.get(rowNumber).get("first_name").toString());
-       // select last_name from teacher where teacher_id = 1035;
-        Assert.assertEquals(lastName, data.get(rowNumber).get("last_name").toString());
-       // select batch from teacher where teacher_id = 1035;
-        Assert.assertEquals(batch, data.get(rowNumber).get("batch").toString());
-       // select birth_date from teacher where teacher_id = 1035;
-        Assert.assertEquals(birthdate, data.get(rowNumber).get("birth_date").toString());
-       // select department from teacher where teacher_id = 1035;
-        Assert.assertEquals(department, data.get(rowNumber).get("department").toString());
-       // select email_address from teacher where teacher_id = 1035;
-        Assert.assertEquals(email, data.get(rowNumber).get("email_address").toString());
-     //   select gender from teacher where teacher_id = 1035;
-        Assert.assertEquals(gender, data.get(rowNumber).get("gender").toString());
-       // select join_date from teacher where teacher_id = 1035;
-        Assert.assertEquals(joiningDate, data.get(rowNumber).get("join_date").toString());
-       // select password from teacher where teacher_id = 1035;
-        Assert.assertEquals(password, data.get(rowNumber).get("password").toString());
-       // select phone from teacher where teacher_id = 1035;
-        Assert.assertEquals(mobileNumber, data.get(rowNumber).get("phone").toString());
-      //  select premanent_address from teacher where teacher_id = 1035;
-        Assert.assertEquals(address, data.get(rowNumber).get("premanent_address").toString());
-       // select salary from teacher where teacher_id = 1035;
-        Assert.assertEquals(salary, data.get(rowNumber).get("salary").toString());
-       // select section from teacher where teacher_id = 1035;
-        Assert.assertEquals(sectionNumber, data.get(rowNumber).get("section").toString());
-       // select subject from teacher where teacher_id = 1035;
-        Assert.assertEquals(subject, data.get(rowNumber).get("subject").toString());
+        System.out.println("Row number is " + rowNumber);
 
-        DBUtility.close();
+       // select first_name from teacher where teacher_id = 1035;
+        Assert.assertEquals(firstName, data.get(rowNumber).get("FIRST_NAME").toString());
+       // select last_name from teacher where teacher_id = 1035;
+        Assert.assertEquals(lastName, data.get(rowNumber).get("LAST_NAME").toString());
+       // select batch from teacher where teacher_id = 1035;
+        Assert.assertEquals(batch, data.get(rowNumber).get("BATCH").toString());
+       // select birth_date from teacher where teacher_id = 1035;
+        Assert.assertEquals(birthdateDB, data.get(rowNumber).get("BIRTH_DATE").toString());
+       // select department from teacher where teacher_id = 1035;
+        Assert.assertEquals(department, data.get(rowNumber).get("DEPARTMENT").toString());
+       // select email_address from teacher where teacher_id = 1035;
+        Assert.assertEquals(email, data.get(rowNumber).get("EMAIL_ADDRESS").toString());
+     //   select gender from teacher where teacher_id = 1035;
+        Assert.assertEquals(gender, data.get(rowNumber).get("GENDER").toString());
+       // select join_date from teacher where teacher_id = 1035;
+        Assert.assertEquals(joiningDateDB, data.get(rowNumber).get("JOIN_DATE").toString());
+       // select password from teacher where teacher_id = 1035;
+        Assert.assertEquals(password, data.get(rowNumber).get("PASSWORD").toString());
+       // select phone from teacher where teacher_id = 1035;
+        Assert.assertEquals(mobileNumber, data.get(rowNumber).get("PHONE").toString());
+      //  select premanent_address from teacher where teacher_id = 1035;
+        System.out.println("UI address " + address );
+        System.out.println("BD address " + data.get(rowNumber).get("PREMANENT_ADDRESS").toString());
+        Assert.assertEquals(address, data.get(rowNumber).get("PREMANENT_ADDRESS").toString().trim());
+       // select salary from teacher where teacher_id = 1035;
+        Assert.assertEquals(salary, data.get(rowNumber).get("SALARY").toString());
+       // select section from teacher where teacher_id = 1035;
+        Assert.assertEquals(sectionNumber, data.get(rowNumber).get("SECTION").toString());
+       // select subject from teacher where teacher_id = 1035;
+        Assert.assertEquals(subject, data.get(rowNumber).get("SUBJECT").toString());
+
+
 
     }
 }

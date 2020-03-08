@@ -7,7 +7,12 @@ formatter.feature({
 formatter.scenario({
   "name": "As a User I should able to create teacher",
   "description": "",
-  "keyword": "Scenario"
+  "keyword": "Scenario",
+  "tags": [
+    {
+      "name": "@smoke"
+    }
+  ]
 });
 formatter.step({
   "name": "User is on home school page",
